@@ -6,6 +6,17 @@
 
 <div class="messageBox">
   <h2></h2>
+  <div ng-repeat="message in messages" >
+    <span class="user">{{ message.name }}</span>
+    <span class="message">{{ message.message }}</span>
+  </div>
+
+  <form ng-submit="sendMsg()" >
+    <div>
+      <input type="text" placeholder='Type your message' ng-model="chatMessage.message" />
+        <button type="submit">Send</button>
+    </div>
+  </form>
 </div>
 
 

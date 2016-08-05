@@ -5,7 +5,8 @@ var app = angular.module('theApp', [
   'ngRoute',
   'loginController',
   'signupController',
-  'chatController'
+  'chatController',
+  'services'
   ])
 
 app.config(['$routeProvider', 'authProvider', '$httpProvider', '$locationProvider', 'jwtInterceptorProvider',
@@ -34,13 +35,15 @@ app.config(['$routeProvider', 'authProvider', '$httpProvider', '$locationProvide
     loginUrl: '/'
     });
 
-    authProvider.on('loginSuccess', ['$location', 'profilePromise', 'idToken', 'store',
-      function($location, profilePromise, idToken, store) {
+    authProvider.on('loginSuccess', ['$location', 'profilePromise', 'idToken', 'store', 'socket',
+      function($location, profilePromise, idToken, store, socket) {
 
         console.log("Login Success");
         profilePromise.then(function(profile) {
           store.set('profile', profile);
           store.set('token', idToken);
+
+          socket.emit('registered', profile.clientID);
         });
 
         $location.path('/chat');
