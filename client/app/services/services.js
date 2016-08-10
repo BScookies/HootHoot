@@ -2,6 +2,18 @@ angular.module('services', [])
   .factory('socket', function () {
     return io.connect();
   })
+  .factory('Globals', function () {
+    var selections = {};
+
+    var setSelectedRecipient = function (recipient) {
+      selections.recipient = recipient;
+    }
+
+    return {
+      selections: selections,
+      setSelectedRecipient: setSelectedRecipient
+    }
+  })
   .factory('ContactService', ['$http', '$rootScope',
     function ContactServiceFactory ($http, $rootScope) {
       var contacts = [];
