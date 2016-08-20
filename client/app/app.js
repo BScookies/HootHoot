@@ -14,7 +14,8 @@ var app = angular.module('theApp', [
   'contactlistdirective',
   'services',
   'mainCtrl',
-  'chat'
+  'chat',
+  'ngSanitize'
   ])
 
 app.config(['$routeProvider', 'authProvider', '$httpProvider', '$locationProvider', 'jwtInterceptorProvider',
